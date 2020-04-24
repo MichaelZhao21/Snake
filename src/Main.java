@@ -4,7 +4,7 @@ import javafx.stage.Stage;
 public class Main extends Application {
     @Override
     public void start(Stage stage) throws Exception {
-        Display d = new Display(stage);
+        Game g = new Game(stage);
     }
 
     public static void main(String[] args) {
