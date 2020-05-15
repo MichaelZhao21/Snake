@@ -1,15 +1,18 @@
 import javafx.geometry.Point2D;
-import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
+import javafx.scene.text.Text;
+import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
 
 public class Display {
     Stage stage;
     Scene scene;
-    Group root;
+    StackPane root;
     Canvas canvas;
     GraphicsContext gc;
     int size;
@@ -23,11 +26,11 @@ public class Display {
     }
 
     private void initStage() {
-        root = new Group();
-        scene = new Scene(root);
+        root = new StackPane();
+        scene = new Scene(root); //TODO bottom align stackpane
         stage.setScene(scene);
         stage.setTitle("Snake");
-        stage.setHeight(size);
+        stage.setHeight(size + 100);
         stage.setWidth(size);
         stage.show();
 
@@ -46,6 +49,24 @@ public class Display {
         for (Point2D p : snake.body) {
             gc.fillRect(p.getX(), p.getY(), gridUnit, gridUnit);
         }
+    }
+
+    public void drawFruit(Point2D fruit) {
+        gc.setFill(Color.RED);
+        gc.fillRect(fruit.getX(), fruit.getY(), gridUnit, gridUnit);
+    }
+
+    public void drawDeath() {
+        Text oops = new Text();
+        oops.setText("Oops! You died!\nPress ENTER to restart\nor any other key to quit :))");
+        oops.setFont(Font.font("Times New Roman", 45));
+        oops.setFill(Color.GOLDENROD);
+        oops.setTextAlignment(TextAlignment.CENTER);
+        StackPane sp = new StackPane(oops);
+        scene = new Scene(sp);
+        stage.setScene(scene);
+        stage.show();
+        // TODO: 4/26/20 FIX 
     }
 
     public void clear() {

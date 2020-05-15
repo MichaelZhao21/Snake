@@ -15,9 +15,9 @@ public class Snake {
         dir = Direction.UP;
     }
 
-    public void move(int gridUnit) {
+    public void move(int gridUnit, boolean grow) {
         body.addFirst(head);
-        if (!body.isEmpty())
+        if (!body.isEmpty() && !grow)
             body.removeLast();
         head = head.add(dirToAdd(gridUnit));
     }
